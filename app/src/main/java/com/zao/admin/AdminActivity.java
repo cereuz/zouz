@@ -1,6 +1,9 @@
 package com.zao.admin;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 
 import com.zao.zouz.LogZ;
 import com.zao.zouz.R;
+import com.zao.zouz.StatusBarUtil;
 
 /**
  * @author : zw
@@ -47,10 +51,16 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
 
     private boolean mIsEditStatus = false;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+
+        StatusBarUtil.showStatusBar(this);
+        StatusBarUtil.setStatusBarLightMode(this,true);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));//设置状态栏的背景色
+
         initTab();
     }
 
@@ -98,6 +108,7 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
     /**
      * 初始化第一个Fragment
      */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void initHomeFragment() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -154,6 +165,7 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
     }
 
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClick(View view) {
 
@@ -162,6 +174,7 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
 
         switch (view.getId()){
             case R.id.rl_home :
+                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));//设置状态栏的背景色
                 /**
                  * 随着Fragment的切换，重新绘制Toolbar的menu
                  */
@@ -188,6 +201,7 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
                 break;
 
             case R.id.rl_group :
+                getWindow().setStatusBarColor(getResources().getColor(R.color.white));//设置状态栏的背景色
                 hideFragment(transaction);
                 clearIcon();
                 //将四个的图片全部设置为未点击状态。

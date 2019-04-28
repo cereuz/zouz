@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements GlobalHandler.Han
          */
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        StatusBarUtil.showStatusBar(this);
+        StatusBarUtil.setStatusBarLightMode(this,true);
 
         setContentView(R.layout.activity_main);
         tv = (TextView)findViewById(R.id.sample_text);
