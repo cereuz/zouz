@@ -1,6 +1,10 @@
 package com.zao.admin;
 
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.zao.ZouUtil;
 import com.zao.zouz.DateUtil;
 import com.zao.zouz.LogZ;
 import com.zao.zouz.R;
@@ -63,7 +68,7 @@ public class GroupFragment extends BaseFragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_main);
         et_uber_url = view.findViewById(R.id.et_uber_url);
 
-        String[] data = {this.getResources().getString(R.string.toGrid),"Zou","Zneo","Uber","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
+        String[] data = {this.getResources().getString(R.string.toGrid),"Zou","Zneo","Uber","WeiXin","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky"};
@@ -111,6 +116,32 @@ public class GroupFragment extends BaseFragment {
         switch (text) {
             case "Uber" :
                 initUber();
+                break;
+            case "WeiXin" :
+//                initWeiXin();
+                ZouUtil.initItem(context,"https://www.11visa.com/","com.pandavisa","com.pandavisa.ui.activity.appstart.AppStart");
+        }
+    }
+
+    /**
+     * 打开微信
+     */
+    private void initWeiXin() {
+        try {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+//            ComponentName cmp = new ComponentName("com.tencent.mm","com.tencent.mm.ui.LauncherUI");
+            ComponentName cmp = new ComponentName("com.pandavisa","com.pandavisa.ui.activity.appstart.AppStart");
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setComponent(cmp);
+            startActivity(intent);
+        } catch (ActivityNotFoundException e){
+            // TODO: handle exception
+            Toast.makeText(mContext, "检查到您手机没有安装微信，正在跳转到官网", Toast.LENGTH_LONG).show();
+//            startAgentWeb("熊猫签证","https://www.11visa.com/");
+            Uri uri = Uri.parse("https://www.11visa.com/");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
         }
     }
 

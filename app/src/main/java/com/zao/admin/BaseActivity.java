@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.zao.activity.AgentWebActivity;
 import com.zao.zouz.MainActivity;
 import com.zao.zouz.R;
 
@@ -101,7 +102,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract int getLayoutId();
 
     protected void startAgentWeb(String title, String url) {
-        Intent intent = new Intent(mContext, MainActivity.class);
+        Intent intent = new Intent(mContext, AgentWebActivity.class);
         intent.putExtra("url", url);
         intent.putExtra("title", title);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

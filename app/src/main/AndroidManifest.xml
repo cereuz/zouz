@@ -26,6 +26,7 @@
             android:launchMode="singleTask"/>
         <activity android:name="com.zao.admin.AdminActivity"
                   android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="com.zao.activity.AgentWebActivity" />
     </application>
 
 </manifest>

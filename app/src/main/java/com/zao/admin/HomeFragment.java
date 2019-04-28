@@ -1,5 +1,7 @@
 package com.zao.admin;
 
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,8 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.zao.zouz.AdminOneActivity;
 import com.zao.zouz.DateUtil;
 import com.zao.zouz.LogZ;
 import com.zao.zouz.R;
