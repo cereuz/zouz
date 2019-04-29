@@ -21,14 +21,16 @@
             android:src="@mipmap/ic_search" />
 
         <EditText
+            android:id="@+id/et_uber_url"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
+            android:cursorVisible="false"
             android:layout_toRightOf="@+id/iv_search"
             android:background="@null"
             android:hint="搜索商品"
             android:paddingLeft="10dp"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/colorText"
             android:textSize="14sp" />
     </RelativeLayout>
 

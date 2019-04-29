@@ -16,6 +16,7 @@
     <color name="colorRed">#ff0000</color>
     <color name="colorGreen">#00CD00</color>
     <color name="colorText">#787878</color>
+    <color name="colorBlack">#080808</color>
 
     <color name="bottom_color_normal">#616161</color>
     <color name="bottom_color_press">#D32F2F</color>

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.zao.base.BaseFragment;
 import com.zao.base.MyApp;
+import com.zao.utils.Constant;
 import com.zao.utils.ZouUtil;
 import com.zao.utils.DateUtil;
 import com.zao.utils.LogZ;
@@ -55,20 +56,21 @@ public class GroupFragment extends BaseFragment {
     }
 
     @Override
-    protected void doOnViewCreated(View view, Bundle savedInstanceState) {
-        mView = view;
-        initView(view);
-    }
-
-    @Override
     protected int getLayoutId() {
         return R.layout.fragment_onezao_group0306;
     }
 
 
+    @Override
+    protected void doOnViewCreated(View view, Bundle savedInstanceState) {
+        mView = view;
+        initView(view);
+    }
+
     private void initView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_main);
         et_uber_url = view.findViewById(R.id.et_uber_url);
+        et_uber_url.setText(Constant.BASE_URL);
 
         String[] data = {this.getResources().getString(R.string.toGrid),"Zou","Zneo","Uber","WeiXin","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",

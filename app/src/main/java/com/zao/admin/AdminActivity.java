@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -60,7 +61,6 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
         StatusBarUtil.showStatusBar(this);
         StatusBarUtil.setStatusBarLightMode(this,true);
         getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));//设置状态栏的背景色
-
         initTab();
     }
 
@@ -190,6 +190,7 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
                 break;
 
             case R.id.rl_status :
+                getWindow().setStatusBarColor(getResources().getColor(R.color.white));//设置状态栏的背景色
                 //将四个的图片全部设置为未点击状态。
                 hideFragment(transaction);
                 clearIcon();
@@ -206,7 +207,7 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
                 break;
 
             case R.id.rl_group :
-                getWindow().setStatusBarColor(getResources().getColor(R.color.white));//设置状态栏的背景色
+                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));//设置状态栏的背景色
                 hideFragment(transaction);
                 clearIcon();
                 //将四个的图片全部设置为未点击状态。

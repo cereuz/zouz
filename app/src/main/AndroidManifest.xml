@@ -25,7 +25,8 @@
         <activity android:name=".ScrollingActivity"
             android:launchMode="singleTask"/>
         <activity android:name="com.zao.admin.AdminActivity"
-                  android:theme="@style/AppTheme.NoActionBar"/>
+                  android:theme="@style/AppTheme.NoActionBar"
+                  android:windowSoftInputMode="stateHidden"/>
         <activity android:name="com.zao.activity.AgentWebActivity" />
     </application>
 
