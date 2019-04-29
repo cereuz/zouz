@@ -2,7 +2,6 @@ package com.zao.admin;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,9 +13,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.zao.zouz.LogZ;
+import com.zao.base.BaseActivity;
+import com.zao.utils.LogZ;
 import com.zao.zouz.R;
-import com.zao.zouz.StatusBarUtil;
+import com.zao.utils.StatusBarUtil;
 
 /**
  * @author : zw

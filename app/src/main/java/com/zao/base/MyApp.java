@@ -1,7 +1,9 @@
-package com.zao.admin;
+package com.zao.base;
 
 import android.app.Application;
 import android.content.Context;
+
+import com.zao.admin.AppManager;
 
 /**
  * @author : zw

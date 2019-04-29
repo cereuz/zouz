@@ -1,4 +1,4 @@
-package com.zao.admin;
+package com.zao.base;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zao.activity.AgentWebActivity;
-import com.zao.zouz.MainActivity;
 
 
 /**
@@ -26,6 +25,7 @@ public abstract class BaseFragment extends Fragment {
     private View baseView;
     protected Activity mContext;
     protected ProgressDialog progressDialog;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,6 +88,17 @@ public abstract class BaseFragment extends Fragment {
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
+    }
+
+    /**
+     * 找到控件ID
+     */
+    protected <T extends View> T findViewById(int id) {
+        if (baseView == null) {
+            return null;
+        }
+
+        return (T) baseView.findViewById(id);
     }
 }
 

@@ -1,4 +1,4 @@
-package com.zao.admin;
+package com.zao.base;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -15,7 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.zao.activity.AgentWebActivity;
-import com.zao.zouz.MainActivity;
+import com.zao.admin.AppManager;
 import com.zao.zouz.R;
 
 import java.util.Timer;

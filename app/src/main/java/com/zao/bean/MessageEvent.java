@@ -1,4 +1,4 @@
-package com.zao.admin;
+package com.zao.bean;
 
 /**
  * @author : zw

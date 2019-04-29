@@ -9,6 +9,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.zao.admin.AdminActivity;
+import com.zao.utils.DateUtil;
+import com.zao.utils.StatusBarUtil;
 
 public class MainActivity extends AppCompatActivity implements GlobalHandler.HandleMsgListener{
 

@@ -1,24 +1,35 @@
 package com.zao.admin;
 
-import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.zao.zouz.DateUtil;
-import com.zao.zouz.LogZ;
+import com.zao.base.BaseFragment;
+import com.zao.bean.MessageEvent;
+import com.zao.utils.DateUtil;
+import com.zao.utils.LogZ;
+import com.zao.utils.ToastUtil;
+import com.zao.viewpager.HeadlineFragment;
+import com.zao.viewpager.RecreationFragment;
+import com.zao.viewpager.SportFragment;
+import com.zao.viewpager.TabFragmentPagerAdapter;
+import com.zao.viewpager.TechnologyFragment;
 import com.zao.zouz.R;
 import com.zao.zouz.ScrollingActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : zw
@@ -50,6 +61,9 @@ public class HomeFragment extends BaseFragment implements AppBarLayout.OnOffsetC
      */
     private View bgToolbarClose;
 
+    TabLayout mViewpagerTab;
+    ViewPager mNewsViewpager;
+
     @Override
     protected void doOnCreate(View baseView, Bundle savedInstanceState) {
         LogZ.e(DateUtil.getCurrentTime_Today());
@@ -58,6 +72,58 @@ public class HomeFragment extends BaseFragment implements AppBarLayout.OnOffsetC
     @Override
     protected void doOnViewCreated(View view, Bundle savedInstanceState) {
         initUI(view);
+        initViewPagerUI(view);
+    }
+
+    /**
+     * ViewPager的界面
+     */
+    private void initViewPagerUI(View view) {
+        //找到控件
+        mViewpagerTab = view.findViewById(R.id.home_viewpager_tab);
+        mNewsViewpager = view.findViewById(R.id.home_viewpager);
+        //fragment列表  
+        List<Fragment> list_fragment = new ArrayList<>();
+        //tab名的列表
+        List<String> list_Title = new ArrayList<>();
+
+        list_fragment.add(new HeadlineFragment());
+        list_fragment.add(new RecreationFragment());
+        list_fragment.add(new SportFragment());
+        list_fragment.add(new TechnologyFragment());
+        list_fragment.add(new HeadlineFragment());
+        list_fragment.add(new RecreationFragment());
+        list_fragment.add(new SportFragment());
+        list_fragment.add(new TechnologyFragment());
+        list_fragment.add(new HeadlineFragment());
+        list_fragment.add(new RecreationFragment());
+        list_fragment.add(new SportFragment());
+        list_fragment.add(new TechnologyFragment());
+
+        list_Title.add("头条");
+        list_Title.add("娱乐");
+        list_Title.add("体育");
+        list_Title.add("科技");
+        list_Title.add("头条");
+        list_Title.add("娱乐");
+        list_Title.add("体育");
+        list_Title.add("科技");
+        list_Title.add("头条");
+        list_Title.add("娱乐");
+        list_Title.add("体育");
+        list_Title.add("科技");
+
+        //设置名称
+        for (int i = 0; i < list_Title.size(); i++) {
+            mViewpagerTab.addTab(mViewpagerTab.newTab().setText(list_Title.get(i)));
+        }
+        TabFragmentPagerAdapter adapter = new TabFragmentPagerAdapter(
+                getActivity().getSupportFragmentManager(), list_fragment, list_Title
+        );
+        //viewpager 加载adapter
+        mNewsViewpager.setAdapter(adapter);
+        //TableLayout加载viewpager
+        mViewpagerTab.setupWithViewPager(mNewsViewpager);
     }
 
     @Override
@@ -70,7 +136,6 @@ public class HomeFragment extends BaseFragment implements AppBarLayout.OnOffsetC
             String strings = event.toString();
             LogZ.e(strings);
             ToastUtil.showT(mContext,"接收到EventBus从其他控件post的消息：" + strings);
-
     }
 
     @Override

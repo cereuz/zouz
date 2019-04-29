@@ -42,7 +42,7 @@ public class AdminOneActivity extends AppCompatActivity implements AppBarLayout.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ali_home);
+        setContentView(R.layout.activity_ali_home_one);
         appBar = findViewById(R.id.app_bar);
         bgContent = findViewById(R.id.bg_content);
         toolbarOpen = findViewById(R.id.include_toolbar_open);

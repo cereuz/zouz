@@ -1,4 +1,4 @@
-package com.zao.zouz;
+package com.zao.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

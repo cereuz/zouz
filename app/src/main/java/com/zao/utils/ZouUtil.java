@@ -1,4 +1,4 @@
-package com.zao;
+package com.zao.utils;
 
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
