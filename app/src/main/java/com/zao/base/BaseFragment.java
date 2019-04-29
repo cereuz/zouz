@@ -33,6 +33,12 @@ public abstract class BaseFragment extends Fragment {
         mContext = getActivity();
     }
 
+    protected abstract int getLayoutId();
+
+    protected abstract void doOnCreate(View baseView, Bundle savedInstanceState);
+
+    protected abstract void doOnViewCreated(View view, Bundle savedInstanceState);
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -52,12 +58,6 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
     }
-
-    protected abstract void doOnCreate(View baseView, Bundle savedInstanceState);
-
-    protected abstract void doOnViewCreated(View view, Bundle savedInstanceState);
-
-    protected abstract int getLayoutId();
 
     protected void startAgentWeb(String title, String url) {
         Intent intent = new Intent(mContext, AgentWebActivity.class);

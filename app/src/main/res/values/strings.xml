@@ -6,6 +6,7 @@
     <string name="app_tab_status">广播</string>
     <string name="app_tab_group">小组</string>
     <string name="app_tab_profile">我的</string>
+    <string name="app_about">    关于我们    \n\t\t\t  zou  \n  Email : zsky@live.com  \n  官网：http://www.22zou.com </string>
 
     <string name="toGrid">Grid</string>
 
@@ -97,5 +98,6 @@
         "On the layout level, design your app layout to minimize opportunities for interference. "
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
+        \n  Email : zsky@live.com  \n  官网 ：http://www.22zou.com  \n\t\t\t \t\t\t\t\t \t\t\t\t\t \t\t  -- zou
     </string>
 </resources>

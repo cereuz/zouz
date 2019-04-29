@@ -79,6 +79,11 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
         //super.onSaveInstanceState(outState);
     }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_admin;
+    }
+
     /**
      * 初始化  底部的四个按钮的切换
      */
@@ -218,6 +223,7 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
                 break;
 
             case R.id.rl_profile :
+                getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));//设置状态栏的背景色
                 /**
                  * 随着Fragment的切换，重新绘制Toolbar的menu
                  */
@@ -263,8 +269,4 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
 
     }
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_admin;
-    }
 }

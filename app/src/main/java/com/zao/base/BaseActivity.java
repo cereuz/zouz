@@ -48,6 +48,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         initDatas();
     }
 
+    /**
+     * 此方法必须要返回明确的值，不然会报异常。
+     * @return
+     */
+    protected abstract int getLayoutId();
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -94,12 +100,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             progressDialog.dismiss();
         }
     }
-
-    /**
-     * 此方法必须要返回明确的值，不然会报异常。
-     * @return
-     */
-    protected abstract int getLayoutId();
 
     protected void startAgentWeb(String title, String url) {
         Intent intent = new Intent(mContext, AgentWebActivity.class);
