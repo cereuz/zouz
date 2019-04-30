@@ -35,6 +35,7 @@ public class ZouUtil {
                 Toast.makeText(context, "检查到您手机没有安装这个APP，正在跳转到官网", Toast.LENGTH_LONG).show();
                 Uri uri = Uri.parse(url);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             } else {
                 Toast.makeText(context, "这个应用官网也没有！正在跳转到主页", Toast.LENGTH_LONG).show();
