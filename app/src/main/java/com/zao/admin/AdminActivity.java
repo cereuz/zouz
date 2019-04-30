@@ -13,6 +13,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zao.base.BaseActivity;
 import com.zao.utils.LogZ;
@@ -51,6 +52,7 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
     private ProfileFragment   profileFragment;
 
     private boolean mIsEditStatus = false;
+    private long firstTime ;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -77,6 +79,22 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         //super.onSaveInstanceState(outState);
+    }
+
+
+    /**
+     * 双击推出当前界面
+     */
+    @Override
+    public void onBackPressed() {
+
+        long secondTime = System.currentTimeMillis();
+        if (secondTime - firstTime > 2000) {
+            Toast.makeText(mContext, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            firstTime = secondTime;
+        } else{
+            finish();
+        }
     }
 
     @Override

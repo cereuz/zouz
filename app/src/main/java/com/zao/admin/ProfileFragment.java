@@ -67,8 +67,6 @@ public class ProfileFragment extends BaseFragment implements AppBarLayout.OnOffs
         super.onResume();
         EventBus.getDefault().post(new MessageEvent("1", "蜗牛","snail"));
         EventBus.getDefault().post(new MessageEvent("2", "葡萄","grape"));
-        EventBus.getDefault().post(new MessageEvent("3", "天空","sky"));
-        EventBus.getDefault().post(new MessageEvent("4", "大地","land"));
     }
 
     @Override

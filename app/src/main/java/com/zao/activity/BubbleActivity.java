@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.zao.base.BaseActivity;
 import com.zao.bean.CircleBean;
 import com.zao.utils.DisplayUtils;
+import com.zao.utils.StatusBarUtil;
 import com.zao.view.BubbleView;
 import com.zao.zouz.MainActivity;
 import com.zao.zouz.R;
@@ -53,6 +54,9 @@ public class BubbleActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+        StatusBarUtil.hideStatusBar(this);
+        StatusBarUtil.setStatusBarLightMode(this,true);
+
         hxbIv = (ImageView) findViewById(R.id.hxb_iv);
         hxbTv = (TextView) findViewById(R.id.center_tv);
         bezierView = (BubbleView) findViewById(R.id.circle_view);

@@ -21,13 +21,15 @@
         <activity android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name="com.zao.admin.AdminActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
+                  android:windowSoftInputMode="stateHidden"
+                  android:launchMode="singleTask"/>
         <activity android:name=".AdminOneActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".ScrollingActivity"
             android:launchMode="singleTask"/>
-        <activity android:name="com.zao.admin.AdminActivity"
-                  android:theme="@style/AppTheme.NoActionBar"
-                  android:windowSoftInputMode="stateHidden"/>
+
         <activity android:name="com.zao.activity.AgentWebActivity" />
 
     </application>

@@ -11,6 +11,7 @@ import com.zao.base.BaseFragment;
 import com.zao.base.MyApp;
 import com.zao.bean.TagBean;
 import com.zao.utils.ToastUtil;
+import com.zao.utils.ZouUtil;
 import com.zao.zouz.R;
 
 import java.util.ArrayList;
@@ -50,15 +51,15 @@ public class HeadlineFragment extends BaseFragment {
 
     private void initData() {
         tagBeanList.removeAll(tagBeanList);
-        tagBeanList.add(new TagBean("1","超准时"));
-        tagBeanList.add(new TagBean("2","很绅士"));
-        tagBeanList.add(new TagBean("3","有礼貌"));
-        tagBeanList.add(new TagBean("4","顾女生"));
-        tagBeanList.add(new TagBean("5","我的男神是个大暖男哦我的男神是个大暖男哦"));
+        tagBeanList.add(new TagBean("1","超 准时"));
+        tagBeanList.add(new TagBean("2","很 绅士"));
+        tagBeanList.add(new TagBean("3","有 礼貌"));
+        tagBeanList.add(new TagBean("4","顾 女生"));
+        tagBeanList.add(new TagBean("5","翡翠图"));
         tagBeanList.add(new TagBean("6","谈吐优雅"));
         tagBeanList.add(new TagBean("7","送我到楼下"));
-        tagBeanList.add(new TagBean("9","迟到"));
-        tagBeanList.add(new TagBean("10","态度恶劣"));
+        tagBeanList.add(new TagBean("9","迟到我的男神是个大暖男哦我的男神是个大暖男哦"));
+        tagBeanList.add(new TagBean("10","熊猫签证"));
         tagBeanList.add(new TagBean("11","有不礼貌行为"));
         tagBeanList.add(new TagBean("12","有侮辱性语言有暴力倾向"));
         tagBeanList.add(new TagBean("13","人身攻击"));
@@ -74,7 +75,7 @@ public class HeadlineFragment extends BaseFragment {
     }
 
     private void setRecyclerView() {
-        final GridLayoutManager layoutManage = new GridLayoutManager(mContext, 4);
+        final GridLayoutManager layoutManage = new GridLayoutManager(mContext, 5);
         /**
          * 设置文字过长的时候，占用几个item
          */
@@ -94,6 +95,7 @@ public class HeadlineFragment extends BaseFragment {
             @Override
             public void onClick(int position) {
                 ToastUtil.showT(mContext,"点击了条目==" + position);
+                ZouUtil.initItem(mContext,"https://www.11visa.com/","com.pandavisa","com.pandavisa.ui.activity.appstart.AppStart");
             }
 
             @Override
