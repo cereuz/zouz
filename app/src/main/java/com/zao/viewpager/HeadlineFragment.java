@@ -49,10 +49,11 @@ public class HeadlineFragment extends BaseFragment {
     }
 
     private void initData() {
-        tagBeanList.add(new TagBean("1","准时"));
-        tagBeanList.add(new TagBean("2","非常绅士"));
-        tagBeanList.add(new TagBean("3","非常有礼貌"));
-        tagBeanList.add(new TagBean("4","很会照顾女生"));
+        tagBeanList.removeAll(tagBeanList);
+        tagBeanList.add(new TagBean("1","超准时"));
+        tagBeanList.add(new TagBean("2","很绅士"));
+        tagBeanList.add(new TagBean("3","有礼貌"));
+        tagBeanList.add(new TagBean("4","顾女生"));
         tagBeanList.add(new TagBean("5","我的男神是个大暖男哦我的男神是个大暖男哦"));
         tagBeanList.add(new TagBean("6","谈吐优雅"));
         tagBeanList.add(new TagBean("7","送我到楼下"));
@@ -73,7 +74,7 @@ public class HeadlineFragment extends BaseFragment {
     }
 
     private void setRecyclerView() {
-        final GridLayoutManager layoutManage = new GridLayoutManager(mContext, 5);
+        final GridLayoutManager layoutManage = new GridLayoutManager(mContext, 4);
         /**
          * 设置文字过长的时候，占用几个item
          */

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.zao.activity.BubbleActivity;
 import com.zao.base.BaseFragment;
 import com.zao.base.MyApp;
 import com.zao.utils.Constant;
@@ -72,7 +73,7 @@ public class GroupFragment extends BaseFragment {
         et_uber_url = view.findViewById(R.id.et_uber_url);
         et_uber_url.setText(Constant.BASE_URL);
 
-        String[] data = {this.getResources().getString(R.string.toGrid),"Zou","Zneo","Uber","WeiXin","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
+        String[] data = {this.getResources().getString(R.string.toGrid),"Zou","Zneo","Uber","WeiXin","Bubble","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky"};
@@ -124,6 +125,8 @@ public class GroupFragment extends BaseFragment {
             case "WeiXin" :
 //                initWeiXin();
                 ZouUtil.initItem(context,"https://www.11visa.com/","com.pandavisa","com.pandavisa.ui.activity.appstart.AppStart");
+            case "Bubble" :
+                startActivity(new Intent(context, BubbleActivity.class));
         }
     }
 

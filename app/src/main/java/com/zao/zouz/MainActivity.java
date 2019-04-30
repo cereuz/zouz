@@ -63,6 +63,9 @@ public class MainActivity extends AppCompatActivity implements GlobalHandler.Han
                 break;
             case 1:
                 startActivity(new Intent(MainActivity.this, AdminActivity.class));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);//下一个页面进入时候的动画，必须在startActivity后使用
+                finish();
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);  //当前页面退出时候的动画，必须在finish后使用
                 break;
         }
     }
@@ -71,4 +74,10 @@ public class MainActivity extends AppCompatActivity implements GlobalHandler.Han
      * which is packaged with this application.
      */
     public native String stringFromJNI();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 }

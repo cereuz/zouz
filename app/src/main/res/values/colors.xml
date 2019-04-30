@@ -20,4 +20,7 @@
 
     <color name="bottom_color_normal">#616161</color>
     <color name="bottom_color_press">#D32F2F</color>
+
+    <color name="circle_start">#fa7832</color>
+    <color name="circle_end">#eb4438</color>
 </resources>
