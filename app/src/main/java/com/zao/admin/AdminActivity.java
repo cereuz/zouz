@@ -2,6 +2,7 @@ package com.zao.admin;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.NotificationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,16 +10,23 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
 import com.zao.base.BaseActivity;
+import com.zao.utils.Constant;
 import com.zao.utils.LogZ;
+import com.zao.utils.NotificationUtil;
+import com.zao.utils.ToastUtil;
 import com.zao.zouz.R;
 import com.zao.utils.StatusBarUtil;
+
+import java.util.List;
 
 /**
  * @author : zw
@@ -64,6 +72,8 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
         StatusBarUtil.setStatusBarLightMode(this,true);
         getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));//设置状态栏的背景色
         initTab();
+        initPermission();
+        initNotification();
     }
 
     /**
@@ -90,16 +100,48 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
 
         long secondTime = System.currentTimeMillis();
         if (secondTime - firstTime > 2000) {
-            Toast.makeText(mContext, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "再按一次退出早早", Toast.LENGTH_SHORT).show();
             firstTime = secondTime;
         } else{
             finish();
         }
     }
 
+    /**
+     * 通知消息
+     * 需要先创建渠道
+     */
+    private void initNotification() {
+        int importance = NotificationManager.IMPORTANCE_HIGH;
+        NotificationUtil.createNotificationChannel(mContext, Constant.CHANNEL_ID_ZOU_CHAT,"早早聊天",importance);
+        NotificationUtil.createNotificationChannel(mContext,Constant.CHANNEL_ID_ZOU_SUBSCRIBE,"早早订阅",importance);
+    }
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_admin;
+    }
+
+    /**
+     * 初始化权限
+     */
+    private void initPermission() {
+        AndPermission.with(mContext)
+                .runtime()
+                .permission(Permission.Group.STORAGE)
+                .onGranted(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+                        ToastUtil.showT(mContext, "权限已获取");
+                    }
+                })
+                .onDenied(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+                        initPermission();
+                    }
+                })
+                .start();
     }
 
     /**

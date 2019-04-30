@@ -3,9 +3,11 @@ package com.zao.admin;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,7 +18,13 @@ import android.widget.Toast;
 import com.zao.activity.BubbleActivity;
 import com.zao.base.BaseFragment;
 import com.zao.base.MyApp;
+import com.zao.httpdownload.ApiMethods;
+import com.zao.httpdownload.DownloadIntentService;
+import com.zao.httpdownload.MyObserver;
+import com.zao.httpdownload.ObserverOnNextListener;
+import com.zao.httpdownload.Version;
 import com.zao.utils.Constant;
+import com.zao.utils.ServiceUtil;
 import com.zao.utils.ZouUtil;
 import com.zao.utils.DateUtil;
 import com.zao.utils.LogZ;
@@ -39,6 +47,8 @@ import okhttp3.Response;
  */
 public class GroupFragment extends BaseFragment {
 
+
+
     private Button btnMain;
     private RecyclerView mRecyclerView;
     EditText et_uber_url;
@@ -48,6 +58,7 @@ public class GroupFragment extends BaseFragment {
     String mUrl;
 
     public static final MediaType JSON= MediaType.parse("application/json; charset=utf-8");
+    private static final int DOWNLOADAPK_ID = 10;
     //"http://192.168.60.23:8080/zou0306/TestJsonUber"
 
     @Override
@@ -71,9 +82,9 @@ public class GroupFragment extends BaseFragment {
     private void initView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_main);
         et_uber_url = view.findViewById(R.id.et_uber_url);
-        et_uber_url.setText(Constant.BASE_URL);
+        et_uber_url.setText(Constant.BASE_URL_JSON);
 
-        String[] data = {this.getResources().getString(R.string.toGrid),"Zou","Zneo","Uber","WeiXin","Bubble","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
+        String[] data = {this.getResources().getString(R.string.toGrid),"Zou","Zneo","Uber","WeiXin","Bubble","Update","Zsky","Zneo","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky"};
@@ -125,9 +136,73 @@ public class GroupFragment extends BaseFragment {
             case "WeiXin" :
 //                initWeiXin();
                 ZouUtil.initItem(context,"https://www.11visa.com/","com.pandavisa","com.pandavisa.ui.activity.appstart.AppStart");
+                break;
             case "Bubble" :
                 startActivity(new Intent(context, BubbleActivity.class));
+                break;
+            case "Update" :
+                startCheckVersion();
+                break;
         }
+    }
+
+    /**
+     * 请求接口，查看是否有版本更新
+     */
+    private void startCheckVersion() {
+        ObserverOnNextListener<Version> listener = new ObserverOnNextListener<Version>() {
+            @Override
+            public void onNext(Version version) {
+                LogZ.e("VersionName: " + version.getVersionName());
+                LogZ.e("VersionDes: " + version.getVersionDes());
+                LogZ.e("VersionCode: " + version.getVersionCode());
+                LogZ.e("DownloadUrl: " + version.getDownloadUrl());
+                showUpdateDialog(version.toString());
+            }
+        };
+        ApiMethods.getCheckVersion(new MyObserver<Version>(mContext,listener),"/api/share/download/ff61ea71-517e-41c4-b688-7b08b832002d",2);
+    }
+
+    /**
+     * 显示是否下载更新选择框
+     */
+    private void showUpdateDialog(String message) {
+        // 这里的属性可以一直设置，因为每次设置后返回的是一个builder对象
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        // 设置提示框的标题
+        builder.setTitle("版本升级").
+                setIcon(R.mipmap.ic_launcher). // 设置提示框的图标
+                setMessage(message).// 设置要显示的信息
+                setPositiveButton("确定", new DialogInterface.OnClickListener() {// 设置确定按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startDownloadService();
+            }
+        }).setNegativeButton("取消", null);//设置取消按钮,null是什么都不做，并关闭对话框
+        AlertDialog alertDialog = builder.create();
+        // 显示对话框
+        alertDialog.show();
+    }
+
+    /**
+     * 开启下载的服务，进行下载操作
+     */
+    private void startDownloadService() {
+        if (ServiceUtil.isServiceRunning(mContext, DownloadIntentService.class.getName())) {
+            Toast.makeText(mContext, "正在下载", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // String downloadUrl = http://sqdd.myapp.com/myapp/qqteam/tim/down/tim.apk;
+        // String downloadUrl = "/qqmi/aphone_p2p/TencentVideo_V6.0.0.14297_848.apk";
+        // String downloadUrl = "/16891/52D9FF5B0E4F30719F913E09BCE9C3E9.apk?fsname=com.tencent.tmgp.sgame_1.43.1.27_43012701.apk&csr=1bbd";
+        String downloadUrl = "/mobs/download/client/android/jtyh.apk";
+        Intent intent = new Intent(mContext, DownloadIntentService.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("download_url", downloadUrl);
+        bundle.putInt("download_id", DOWNLOADAPK_ID);
+        bundle.putString("download_file", downloadUrl.substring(downloadUrl.lastIndexOf('/') + 1));
+        intent.putExtras(bundle);
+        mContext.startService(intent);
     }
 
     /**
