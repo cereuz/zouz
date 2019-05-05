@@ -18,8 +18,8 @@
     </android.support.v7.widget.Toolbar>
 
     <include
-        android:id="@+id/rotation_viewpager"
-        layout="@layout/rotation_viewpager"/>
+        android:id="@+id/activity_banner2"
+        layout="@layout/activity_banner2"/>
 
     <Button
         android:id="@+id/btn_recycle"

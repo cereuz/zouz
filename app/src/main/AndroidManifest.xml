@@ -35,6 +35,10 @@
             android:launchMode="singleTask"/>
 
         <activity android:name="com.zao.activity.AgentWebActivity" />
+        <activity android:name="com.zao.activity.BannerActivity" />
+        <activity android:name="com.zao.activity.NormalActivity" />
+        <activity android:name="com.zao.activity.OverFlyingActivity" />
+        <activity android:name="com.zao.activity.BannerTextActivity" />
 
         <service android:name="com.zao.httpdownload.DownloadIntentService" />
 

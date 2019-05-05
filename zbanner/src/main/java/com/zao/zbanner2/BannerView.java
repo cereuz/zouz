@@ -1,4 +1,4 @@
-package com.zao.zbanner;
+package com.zao.zbanner2;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -23,6 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.Scroller;
 import android.widget.TextView;
 
+import com.zao.zbanner.R;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,12 +46,6 @@ public class BannerView<Item> extends FrameLayout {
     public interface TitleAdapter<Item> {
         CharSequence getTitle(Item item);
     }
-
-    float  DownX;//float DownX
-    float  DownY;//float DownY
-    float  moveX;
-    float  moveY;
-    long  currentMS;//long currentMS     获取系统时间
 
     public static final int VISIBLE_AUTO = 0;
     public static final int VISIBLE_ALWAYS = 1;
