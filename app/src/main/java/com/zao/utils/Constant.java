@@ -14,7 +14,7 @@ public class Constant {
     /**
      * 访问Servlet的接口
      */
-    public static final String BASE_URL_JSON = "http://192.168.60.24:8080/zou0306/TestJsonUber";
+    public static final String BASE_URL_JSON = "http://192.168.60.22:8080/zou0306/TestJsonUber";
 
     public static final String BASE_URL = "http://download1.bankcomm.com";
     public final static String APP_ROOT_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + MyApp.getContext().getPackageName();

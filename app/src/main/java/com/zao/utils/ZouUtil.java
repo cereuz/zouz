@@ -41,8 +41,6 @@ public class ZouUtil {
                 Toast.makeText(context, "这个应用官网也没有！正在跳转到主页", Toast.LENGTH_LONG).show();
                 context.startActivity(new Intent(context, AdminOneActivity.class));
             }
-
-
         }
     }
 }
