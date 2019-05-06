@@ -12,6 +12,7 @@ import android.widget.RemoteViews;
 import com.zao.utils.ApkUtils;
 import com.zao.utils.Constant;
 import com.zao.utils.LogZ;
+import com.zao.utils.ToastUtil;
 import com.zao.zouz.R;
 
 import java.io.File;
@@ -22,12 +23,12 @@ import java.io.File;
  * @motto : To be, or not to be.
  * @date : 2019/3/25 10:32
  */
-public class DownloadIntentService extends IntentService {
+public class UrlDownloadIntentService extends IntentService {
 
     private String mDownloadFileName;
     private Context mContext;
 
-    public DownloadIntentService() {
+    public UrlDownloadIntentService() {
         super("InitializeService");
         mContext = this;
     }
@@ -41,7 +42,7 @@ public class DownloadIntentService extends IntentService {
         LogZ.e("download_url --" + downloadUrl);
         LogZ.e("download_file --" + mDownloadFileName);
 
-        final File file = new File(Constant.APP_ROOT_PATH_PRE + Constant.DOWNLOAD_DIR + mDownloadFileName);
+        final File file = new File(Constant.APP_ROOT_PATH_PRE + Constant.ZOU_DIR + mDownloadFileName);
         long range = 0;
         int progress = 0;
         if (file.exists()) {
@@ -49,7 +50,8 @@ public class DownloadIntentService extends IntentService {
             progress = (int) (range * 100 / file.length());
             if (range == file.length()) {
 //                installApp(file);
-                ApkUtils.installAPk(mContext,file);
+//                ApkUtils.installAPk(mContext,file);
+                ToastUtil.showT(mContext,"下载成功！");
                 return;
             }
         }
@@ -63,7 +65,6 @@ public class DownloadIntentService extends IntentService {
 
         final NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         final Notification notification = new NotificationCompat.Builder(this, Constant.CHANNEL_ID_ZOU_CHAT)
-                .setContentTitle(mDownloadFileName)
                 .setContent(remoteViews)
                 .setTicker("正在下载")
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -71,7 +72,7 @@ public class DownloadIntentService extends IntentService {
                 .build();
         manager.notify(downloadId,notification);
 
-        RetrofitHttp.getInstance().downloadFile(range, downloadUrl, mDownloadFileName, new DownloadCallBack() {
+        UrlRetrofitHttp.getInstance().downloadFile(range, downloadUrl, mDownloadFileName, new DownloadCallBack() {
             @Override
             public void onProgress(int progress) {
                 remoteViews.setProgressBar(R.id.pb_progress, 100, progress, false);

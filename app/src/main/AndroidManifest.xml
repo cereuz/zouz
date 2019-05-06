@@ -41,6 +41,7 @@
         <activity android:name="com.zao.activity.BannerTextActivity" />
 
         <service android:name="com.zao.httpdownload.DownloadIntentService" />
+        <service android:name="com.zao.httpdownload.UrlDownloadIntentService" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

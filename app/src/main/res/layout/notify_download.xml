@@ -28,6 +28,8 @@
             android:text="我的应用"
             android:textColor="#333333"
             android:textSize="16sp"
+            android:singleLine="true"
+            android:ellipsize="middle"
             />
 
         <ProgressBar

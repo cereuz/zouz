@@ -26,6 +26,7 @@ import com.zao.httpdownload.ApiMethods;
 import com.zao.httpdownload.DownloadIntentService;
 import com.zao.httpdownload.MyObserver;
 import com.zao.httpdownload.ObserverOnNextListener;
+import com.zao.httpdownload.UrlDownloadIntentService;
 import com.zao.httpdownload.Version;
 import com.zao.utils.Constant;
 import com.zao.utils.ServiceUtil;
@@ -96,7 +97,7 @@ public class GroupFragment extends BaseFragment {
         et_uber_url.setText(Constant.BASE_URL_JSON);
         et_uber_url.setCursorVisible(true);
 
-        String[] data = {this.getResources().getString(R.string.toGrid),"Zou","Zneo","Uber","WeiXin","Bubble","Update","Banner","BannerText","Zsky","Zneo","Zsky",
+        String[] data = {this.getResources().getString(R.string.toGrid),"Zou","Zload","Uber","WeiXin","Bubble","Update","Banner","BannerText","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky"};
@@ -171,13 +172,17 @@ public class GroupFragment extends BaseFragment {
             }
         });
         banner2.setAutoPlaying(true);
-//        banner2.setVisibility(View.GONE);
+        banner2.setVisibility(View.GONE);
     }
 
 
     private void doItemClick(String text, int position) {
         Toast.makeText(context, text + "    " + position, Toast.LENGTH_SHORT).show();
         switch (text) {
+
+            case "Zload" :
+                startUrlDownloadService();
+                break;
             case "Uber" :
                 initUber();
                 break;
@@ -260,6 +265,27 @@ public class GroupFragment extends BaseFragment {
     }
 
     /**
+     * 开启下载的服务，进行下载操作
+     */
+    private void startUrlDownloadService() {
+        if (ServiceUtil.isServiceRunning(mContext, UrlDownloadIntentService.class.getName())) {
+            Toast.makeText(mContext, "正在下载", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        // String downloadUrl = http://sqdd.myapp.com/myapp/qqteam/tim/down/tim.apk;
+        // String downloadUrl = "/qqmi/aphone_p2p/TencentVideo_V6.0.0.14297_848.apk";
+        // String downloadUrl = "/16891/52D9FF5B0E4F30719F913E09BCE9C3E9.apk?fsname=com.tencent.tmgp.sgame_1.43.1.27_43012701.apk&csr=1bbd";
+        String downloadUrl = et_uber_url.getText().toString().trim();
+        Intent intent = new Intent(mContext, UrlDownloadIntentService.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("download_url", downloadUrl);
+        bundle.putInt("download_id", DOWNLOADAPK_ID + 1);
+        bundle.putString("download_file", downloadUrl.substring(downloadUrl.lastIndexOf('/') + 1));
+        intent.putExtras(bundle);
+        mContext.startService(intent);
+    }
+
+    /**
      * 打开微信
      */
     private void initWeiXin() {
@@ -307,6 +333,8 @@ public class GroupFragment extends BaseFragment {
                 .add("platform", "android")
                 .add("version", "23")
                 .add("SDK", "24")
+                .add("Tom", "Ztom")
+                .add("Book", "少年维特之烦恼")
                 .build();
         //构建一个请求对象
         Request request = new Request.Builder()
