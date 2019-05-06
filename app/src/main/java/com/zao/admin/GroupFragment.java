@@ -19,6 +19,7 @@ import com.zao.activity.BannerActivity;
 import com.zao.activity.BannerTextActivity;
 import com.zao.activity.BubbleActivity;
 import com.zao.activity.RecyclerViewBannerNormal;
+import com.zao.adapter.WebBannerAdapter;
 import com.zao.base.BaseFragment;
 import com.zao.base.MyApp;
 import com.zao.httpdownload.ApiMethods;
@@ -83,45 +84,12 @@ public class GroupFragment extends BaseFragment {
     protected void doOnViewCreated(View view, Bundle savedInstanceState) {
         mView = view;
         initView(view);
-
         initBanner();
-    }
-
-    private void initBanner() {
-        List<String> list = new ArrayList<>();
-        list.add("https://img3.doubanio.com/view/photo/l/public/p2360494161.webp");
-        list.add("https://s2.mogucdn.com/mlcdn/c45406/170420_1hcbb7h5b58ihilkdec43bd6c2ll6_750x500.jpg");
-        list.add("https://img3.doubanio.com/view/photo/l/public/p2535136785.webp");
-        list.add("http://s16.mogucdn.com/p2/170204/upload_56631h6616g4e2e45hc6hf6b7g08f_750x500.jpg");
-        list.add("https://img1.doubanio.com/view/photo/l/public/p2454230998.webp");
-        list.add("https://s2.mogucdn.com/mlcdn/c45406/170420_1hcbb7h5b58ihilkdec43bd6c2ll6_750x500.jpg");
-        list.add("https://img1.doubanio.com/view/photo/l/public/p2320164299.webp");
-        list.add("https://img3.doubanio.com/view/photo/l/public/p2535136785.webp");
-        list.add("https://img1.doubanio.com/view/photo/l/public/p2031503598.webp");
-        list.add("https://img3.doubanio.com/view/photo/l/public/p2535136771.webp");
-        list.add("http://s16.mogucdn.com/p2/170204/upload_56631h6616g4e2e45hc6hf6b7g08f_750x500.jpg");
-        list.add("https://img1.doubanio.com/view/photo/l/public/p2454230998.webp");
-        list.add("https://img1.doubanio.com/view/photo/l/public/p2535136759.webp");
-
-        banner.initBannerImageView(list, new RecyclerViewBannerBase.OnBannerItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Toast.makeText(mContext, "clicked:" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-        banner2.initBannerImageView(list, new RecyclerViewBannerBase.OnBannerItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Toast.makeText(mContext, "clicked:" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-        banner2.setVisibility(View.GONE);
     }
 
     private void initView(View view) {
         banner = (RecyclerViewBannerNormal) view.findViewById(R.id.banner);
         banner2 = (RecyclerViewBannerNormal) view.findViewById(R.id.banner2);
-
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_main);
         et_uber_url = view.findViewById(R.id.et_uber_url);
@@ -169,6 +137,41 @@ public class GroupFragment extends BaseFragment {
             }
         });
         btnMain.setVisibility(View.GONE);
+    }
+
+    private void initBanner() {
+        List<String> list = new ArrayList<>();
+        list.add("https://img3.doubanio.com/view/photo/l/public/p2360494161.webp");
+        list.add("https://s2.mogucdn.com/mlcdn/c45406/170420_1hcbb7h5b58ihilkdec43bd6c2ll6_750x500.jpg");
+        list.add("https://img3.doubanio.com/view/photo/l/public/p2535136785.webp");
+        list.add("http://s16.mogucdn.com/p2/170204/upload_56631h6616g4e2e45hc6hf6b7g08f_750x500.jpg");
+        list.add("https://img1.doubanio.com/view/photo/l/public/p2454230998.webp");
+        list.add("https://s2.mogucdn.com/mlcdn/c45406/170420_1hcbb7h5b58ihilkdec43bd6c2ll6_750x500.jpg");
+        list.add("https://img1.doubanio.com/view/photo/l/public/p2320164299.webp");
+        list.add("https://img3.doubanio.com/view/photo/l/public/p2535136785.webp");
+        list.add("https://img1.doubanio.com/view/photo/l/public/p2031503598.webp");
+        list.add("https://img3.doubanio.com/view/photo/l/public/p2535136771.webp");
+        list.add("http://s16.mogucdn.com/p2/170204/upload_56631h6616g4e2e45hc6hf6b7g08f_750x500.jpg");
+        list.add("https://img1.doubanio.com/view/photo/l/public/p2454230998.webp");
+        list.add("https://img1.doubanio.com/view/photo/l/public/p2535136759.webp");
+
+        banner.initBannerImageView(list, new RecyclerViewBannerBase.OnBannerItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(mContext, "clicked:" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        banner.setAutoPlaying(true);
+//        banner.setShowIndicator(false);
+
+        banner2.initBannerImageView(list, new RecyclerViewBannerBase.OnBannerItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(mContext, "clicked:" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        banner2.setAutoPlaying(true);
+//        banner2.setVisibility(View.GONE);
     }
 
 

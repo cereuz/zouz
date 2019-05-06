@@ -221,6 +221,10 @@ public abstract class RecyclerViewBannerBase<L extends RecyclerView.LayoutManage
         return isPlaying;
     }
 
+    /**
+     *  设置圆点是否显示
+     * @param showIndicator
+     */
     public void setShowIndicator(boolean showIndicator) {
         this.showIndicator = showIndicator;
         indicatorContainer.setVisibility(showIndicator ? VISIBLE : GONE);
