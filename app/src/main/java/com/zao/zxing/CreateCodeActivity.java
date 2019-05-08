@@ -1,11 +1,11 @@
 package com.zao.zxing;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,6 +53,8 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
 
     Context mContext;
     String key;
+    int sHeight;
+    int sWidth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,11 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_create_code);
 
         mContext = getBaseContext();
+
+        //2、通过Resources获取
+        DisplayMetrics dm = mContext.getResources().getDisplayMetrics();
+        sHeight = dm.heightPixels;
+        sWidth = dm.widthPixels - 80;
 
         etCodeKey = (EditText)findViewById(R.id.et_code_key);
         btnCreateCode = (Button)findViewById(R.id.btn_create_code);
@@ -90,7 +98,7 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
                 break;
             case  R.id.btn_create_code_and_img: //生成码, 加入头像
                 Bitmap bitmap = create2Code(key);
-                Bitmap headBitmap = getHeadBitmap(60);
+                Bitmap headBitmap = getHeadBitmap(sWidth/5);
                 if(bitmap!=null&&headBitmap!=null){
                     createQRCodeBitmapWithPortrait(bitmap,headBitmap);
                 }
@@ -140,7 +148,7 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
             uri = data.getData();
         }
         Bitmap bitmap = create2Code(key);
-        Bitmap headBitmap = getHeadBitmap(60,BitmapUtil.getBitmapFormUri(mContext,uri));
+        Bitmap headBitmap = getHeadBitmap(sWidth/5,BitmapUtil.getBitmapFormUri(mContext,uri));
         if(bitmap!=null&&headBitmap!=null){
             createQRCodeBitmapWithPortrait(bitmap,headBitmap);
         }
@@ -158,7 +166,7 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
     private Bitmap createBarCode(String key) {
         Bitmap qrCode = null;
         try {
-            qrCode = EncodingHandler.createBarCode(key, 600, 300);
+            qrCode = EncodingHandler.createBarCode(key, sWidth, sWidth/2);
             ivBarCode.setImageBitmap(qrCode);
         } catch (Exception e) {
             Toast.makeText(this,"输入的内容条形码不支持！",Toast.LENGTH_SHORT).show();
@@ -174,7 +182,7 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
     private Bitmap create2Code(String key) {
         Bitmap qrCode=null;
         try {
-            qrCode= EncodingHandler.create2Code(key, 400);
+            qrCode= EncodingHandler.create2Code(key, sWidth);
             iv2Code.setImageBitmap(qrCode);
         } catch (WriterException e) {
             e.printStackTrace();
@@ -194,6 +202,7 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
             Matrix mMatrix = new Matrix();
             float width = portrait.getWidth();
             float height = portrait.getHeight();
+            portrait = BitmapUtil.getCircleBitmapByShader(portrait,(int)width ,(int)height ,3,Color.GREEN);
             mMatrix.setScale(size / width, size / height);
             return Bitmap.createBitmap(portrait, 0, 0, (int) width,
                     (int) height, mMatrix, true);
@@ -213,6 +222,7 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
             Matrix mMatrix = new Matrix();
             float width = portrait.getWidth();
             float height = portrait.getHeight();
+            portrait = BitmapUtil.getRoundBitmapByShader(portrait,(int)width,(int)height,40,20, Color.WHITE);
             mMatrix.setScale(size / width, size / height);
             return Bitmap.createBitmap(portrait, 0, 0, (int) width,
                     (int) height, mMatrix, true);
@@ -250,6 +260,19 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
 
 
     public  void clickPic(ImageView imageView) {
+        // TODO 自动生成的方法存根
+        imageView.setDrawingCacheEnabled(true);
+        Bitmap bitmap = imageView.getDrawingCache();
+        saveBitmapFile(bitmap);
+        imageView.setDrawingCacheEnabled(false);
+        Toast.makeText(CreateCodeActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 不切换照片的时候，正常，切换照片之后保存的是前一张照片。
+     * @param imageView
+     */
+    public  void clickPic2(ImageView imageView) {
         // TODO 自动生成的方法存根
         imageView.buildDrawingCache(true);
         imageView.buildDrawingCache();
