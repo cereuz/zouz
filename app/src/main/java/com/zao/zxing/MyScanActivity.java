@@ -1,11 +1,13 @@
 package com.zao.zxing;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.zao.utils.StatusBarUtil;
 import com.zao.zouz.R;
 
 /**
@@ -36,6 +38,10 @@ public class MyScanActivity extends AppCompatActivity implements View.OnClickLis
         scan_code =  (Button)findViewById(R.id.scan_code);
         scan_code.setOnClickListener(this);
 
+        StatusBarUtil.setStatusBarLightMode(this,true); //修改字体颜色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.white));//设置状态栏的背景色
+        }
     }
 
     /**
