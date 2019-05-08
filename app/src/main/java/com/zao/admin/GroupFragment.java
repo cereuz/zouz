@@ -28,6 +28,7 @@ import com.zao.httpdownload.MyObserver;
 import com.zao.httpdownload.ObserverOnNextListener;
 import com.zao.httpdownload.UrlDownloadIntentService;
 import com.zao.httpdownload.Version;
+import com.zao.pressure0306.PressureDiagramActivity;
 import com.zao.utils.Constant;
 import com.zao.utils.ServiceUtil;
 import com.zao.utils.ZouUtil;
@@ -35,6 +36,7 @@ import com.zao.utils.DateUtil;
 import com.zao.utils.LogZ;
 import com.zao.zbanner.RecyclerViewBannerBase;
 import com.zao.zouz.R;
+import com.zao.zxing.MyScanActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -97,7 +99,7 @@ public class GroupFragment extends BaseFragment {
         et_uber_url.setText(Constant.BASE_URL_JSON);
         et_uber_url.setCursorVisible(true);
 
-        String[] data = {this.getResources().getString(R.string.toGrid),"Zou","Zload","Uber","WeiXin","Bubble","Update","Banner","BannerText","Zsky","Zneo","Zsky",
+        String[] data = {this.getResources().getString(R.string.toGrid),"Zou","Zsky","Scan","Zload","Uber","WeiXin","Bubble","Update","Banner","BannerText","Pressure","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky",
                 "Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky","Zneo","Zsky"};
@@ -183,6 +185,9 @@ public class GroupFragment extends BaseFragment {
             case "Zload" :
                 startUrlDownloadService();
                 break;
+            case "Scan" :
+                startActivity(new Intent(context, MyScanActivity.class));
+                break;
             case "Uber" :
                 initUber();
                 break;
@@ -201,6 +206,9 @@ public class GroupFragment extends BaseFragment {
                 break;
             case "BannerText" :
                 startActivity(new Intent(context, BannerTextActivity.class));
+                break;
+            case "Pressure" :
+                startActivity(new Intent(context, PressureDiagramActivity.class));
                 break;
         }
     }
@@ -329,12 +337,13 @@ public class GroupFragment extends BaseFragment {
         OkHttpClient okHttpClient = new OkHttpClient();
         //构建一个请求体 add参数1 key 参数2 value 发送字段
         RequestBody requestBody = new FormBody.Builder()
-                .add("time", DateUtil.getCurrentTime_Today_One())
+                .add("time", System.currentTimeMillis() + "")
                 .add("platform", "android")
                 .add("version", "23")
                 .add("SDK", "24")
                 .add("Tom", "Ztom")
                 .add("Book", "少年维特之烦恼")
+                .add("Poem", getResources().getString(R.string.large_text2))
                 .build();
         //构建一个请求对象
         Request request = new Request.Builder()

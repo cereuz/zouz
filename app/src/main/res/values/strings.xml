@@ -1,14 +1,31 @@
 <resources>
     <string name="app_name">Zouz</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_setting">设置</string>
     <string name="app_tab_home">首页</string>
     <string name="app_tab_status">广播</string>
     <string name="app_tab_group">小组</string>
     <string name="app_tab_profile">我的</string>
     <string name="app_about">    关于我们    \n\t\t\t  zou  \n  Email : zsky@live.com  \n  官网：http://www.22zou.com </string>
 
+    <string name="action_diary">日记</string>
+    <string name="action_query">查询</string>
+    <string name="action_about">关于</string>
+    <string name="action_more">更多</string>
+    <string name="action_pressure">压力</string>
+    <string name="action_start">启动</string>
+
+    <string name="start">开始</string>
+    <string name="stop">结束</string>
+
     <string name="toGrid">Grid</string>
+
+    <string name="scan_barcode_title">条形码扫描</string>
+    <string name="scan_qrcode_title">二维码扫描</string>
+    <string name="scan_allcode_title">二维码或条形码扫描</string>
+    <string name="scan_barcode_hint">将条形码对入取景框，即可自动扫描</string>
+    <string name="scan_qrcode_hint">将二维码对入取景框，即可自动扫描</string>
+    <string name="scan_allcode_hint">将二维码或条形码对入取景框，即可自动扫描</string>
 
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -99,5 +116,20 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
         \n  Email : zsky@live.com  \n  官网 ：http://www.22zou.com  \n\t\t\t \t\t\t\t\t \t\t\t\t\t \t\t  -- zou
+    </string>
+    <string name="large_text2">
+        北冥有鱼，其名曰鲲。鲲之大，不知其几千里也；化而为鸟，其名为鹏。鹏之背，不知其几千里也；怒而飞，其翼若垂天之云。
+        是鸟也，海运则将徙于南冥。南冥者，天池也。齐谐者，志怪者也。
+        谐之言曰：“鹏之徙于南冥也，水击三千里，抟扶摇而上者九万里，去以六月息者也。”野马也，尘埃也，生物之以息相吹也。天之苍苍，其正色邪？其远而无所至极邪？其视下也，亦若是则已矣。且夫水之积也不厚，则其负大舟也无力。 覆杯水于坳堂之上，则芥为之舟；置杯焉则胶，水浅而舟大也。风之积也不厚，则其负大翼也无力，故九万里则风斯在下矣。
+        而后乃今培风，背负青天而莫之夭阏者，而后乃今将图南。蜩与学鸠笑之曰：“我决起而飞，抢榆枋，时则不至，而控于地而已矣；奚以之九万里而南为？”
+        适莽苍者，三飡而反，腹犹果然；适百里者，宿舂粮；适千里者，三月聚粮。之二虫又何知？小知不及大知，小年不及大年。奚以知其然也？
+        朝菌不知晦朔，蟪蛄不知春秋，此小年也。楚之南有冥灵者，以五百岁为春，五百岁为秋；上古有大椿者，以八千岁为春，八千岁为秋。
+        而彭祖乃今以久特闻，众人匹之，不亦悲乎？ 汤之问棘也是已：“穷发之北有冥海者，天池也。有鱼焉，其广数千里，未有知其修者，其名曰鲲。有鸟焉，其名为鹏，背若太山，翼若垂天之云；
+        抟扶摇、羊角而上者九万里，绝云气，负青天，然后图南，且适南冥也。
+        斥鴳笑之曰：‘彼且奚适也？我腾跃而上，不过数仞而下，翱翔蓬蒿之间，此亦飞之至也。而彼且奚适也？’”此小大之辩也。
+        故夫知效一官、行比一乡、德合一君、而徵一国者，其自视也亦若此矣。而宋荣子犹然笑之。
+        且举世而誉之而不加劝，举世而非之而不加沮，定乎内外之分，辩乎荣辱之境，斯已矣。彼其于世，未数数然也。虽然，犹有未树也。
+        夫列子御风而行，泠然善也，旬有五日而后反。彼于致福者，未数数然也。此虽免乎行，犹有所待者也。若夫乘天地之正，而御六气之辩，以游无穷者，彼且恶乎待哉？
+        故曰：至人无己，神人无功，圣人无名。 听风者无耳，千里眼无目，悲喜交加的时候是个真实的梦靥； 2018年11月11日 07时02分01秒 星期日
     </string>
 </resources>

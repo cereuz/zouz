@@ -129,6 +129,7 @@ public class AdminActivity extends BaseActivity implements View.OnClickListener 
         AndPermission.with(mContext)
                 .runtime()
                 .permission(Permission.Group.STORAGE)
+                .permission(Permission.Group.CAMERA)
                 .onGranted(new Action<List<String>>() {
                     @Override
                     public void onAction(List<String> data) {

@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -17,6 +18,11 @@ import com.zao.zouz.AdminOneActivity;
  * @date : 2019/4/28 14:52
  */
 public class ZouUtil {
+
+    public static  String  pathSD = Environment.getExternalStorageDirectory().getPath();
+
+    public static  String  pathSave = "/ame";
+
     /**
      * 打开APP或者跳转到官网或者主页
      */

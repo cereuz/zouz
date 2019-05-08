@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <Button 
+        android:id="@+id/btn_pdstart_0130"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startOrStop"
+        android:text="@string/start"/>
+
+    <EditText 
+        android:id="@+id/et_pressure_0130"
+        android:layout_toRightOf="@id/btn_pdstart_0130"
+        android:gravity="center|end"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/app_name"
+        android:background="@null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <ProgressBar 
+        android:id="@+id/pb_pressure_0130"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_pdstart_0130"
+        style="@android:style/Widget.ProgressBar.Horizontal"/>
+    
+    <com.zao.pressure0306.MyPressureView
+        android:id="@+id/pb_mypressure_0130"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pb_pressure_0130"/>
+</RelativeLayout>

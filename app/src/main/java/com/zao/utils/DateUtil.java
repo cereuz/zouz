@@ -17,9 +17,19 @@ import java.util.Locale;
 public class DateUtil {
 
     public static String getTodayDateTime() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ",
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
                 Locale.getDefault());
         return format.format(new Date());
+    }
+
+    //获取系统时间。
+    @SuppressLint("SimpleDateFormat")
+    public  static String getSystemTime(){
+        //	SimpleDateFormat    formatter    =   new    SimpleDateFormat    ("yyyy年MM月dd日 HH:mm:ss ");
+        SimpleDateFormat formatter    =   new    SimpleDateFormat    ("yyyy-MM-dd HH:mm:ss");
+        Date curDate    =   new    Date(System.currentTimeMillis());//获取当前时间
+        String    str    =    formatter.format(curDate);
+        return str;
     }
 
     //获取系统时间。

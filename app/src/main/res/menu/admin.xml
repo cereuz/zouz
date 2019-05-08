@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- 搜索, 应该作为动作按钮展示-->
+    <item android:id="@+id/action_search"
+        android:icon="@drawable/ic_action_search"
+        android:title="@string/action_diary"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_diary"
+        android:icon="@drawable/ic_menu_camera"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/action_diary"/>
+    <item
+        android:id="@+id/action_start"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/action_start"/>
+
+    <item
+        android:id="@+id/action_pressure"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_menu_send"
+        android:title="@string/action_pressure"/>
+
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/action_about"/>
+
+    <item
+        android:id="@+id/action_diary2"
+        android:icon="@drawable/ic_menu_camera"
+        android:orderInCategory="101"
+        app:showAsAction="never"
+        android:title="@string/action_more">
+        <menu>
+            <item
+                android:id="@+id/action_query2"
+                android:orderInCategory="101"
+                android:title="@string/action_query"/>
+
+            <item
+                android:id="@+id/action_settings2"
+                android:orderInCategory="101"
+                app:showAsAction="never"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/action_setting"/>
+
+            <item
+                android:id="@+id/action_about2"
+                android:orderInCategory="101"
+                app:showAsAction="never"
+                android:title="@string/action_about"/>
+        </menu>
+    </item>
+</menu>
