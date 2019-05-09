@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -17,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
+import com.zao.utils.StatusBarUtil2;
 import com.zao.zouz.R;
 import com.zao.zxing.zxing.ScanListener;
 import com.zao.zxing.zxing.ScanManager;
@@ -51,15 +56,43 @@ public class CommonScanActivity extends AppCompatActivity implements ScanListene
     TextView tv_scan_hint;
     TextView tv_scan_result;
 
+    int width;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //当FitsSystemWindows设置 true 时，会在屏幕最上方预留出状态栏高度的 padding
+        StatusBarUtil2.setRootViewFitsSystemWindows(this,true);
+        //设置状态栏透明
+        StatusBarUtil2.setTranslucentStatus(this);
+        //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
+        //所以如果你是这种情况,请使用以下代码, 设置状态使用深色文字图标风格, 否则你可以选择性注释掉这个if内容
+        if (!StatusBarUtil2.setStatusBarDarkTheme(this, false)) {
+            //如果不支持设置深色风格 为了兼容总不能让状态栏白白的看不清, 于是设置一个状态栏颜色为半透明,
+            //这样半透明+白=灰, 状态栏的文字能看得清
+            StatusBarUtil2.setStatusBarColor(this,0x55000000);
+        }
+
+//        android:fitsSystemWindows="true"      //注意这个放的位置。
+        //设置下边的控件直接作为状态栏的背景。沉浸模式
+/*        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }*/
+
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         setContentView(R.layout.activity_scan_code);
         scanMode = getIntent().getIntExtra(ConstantZ.REQUEST_SCAN_MODE, ConstantZ.REQUEST_SCAN_MODE_ALL_MODE);
         initView();
+
+/*        StatusBarUtil.setStatusBarLightMode(this,false); //修改字体颜色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorBlack));//设置状态栏的背景色
+        }*/
     }
 
     void initView() {

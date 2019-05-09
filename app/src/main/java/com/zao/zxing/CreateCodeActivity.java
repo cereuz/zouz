@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import com.google.zxing.WriterException;
 import com.zao.utils.BitmapUtil;
 import com.zao.utils.DateUtil;
+import com.zao.utils.StatusBarUtil;
 import com.zao.utils.ZouUtil;
 import com.zao.zouz.R;
 import com.zao.zxing.zxing.encode.EncodingHandler;
@@ -79,6 +81,11 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
         ivBarCode.setOnClickListener(this);
 
         btnCreateCodeAndImg.setOnLongClickListener(this);
+
+        StatusBarUtil.setStatusBarLightMode(this,true); //修改字体颜色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.white));//设置状态栏的背景色
+        }
     }
 
 

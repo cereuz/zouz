@@ -48,7 +48,8 @@
         <activity android:name="com.zao.activity.BannerTextActivity" />
         <activity android:name="com.zao.pressure0306.PressureDiagramActivity"
                   android:theme="@style/AppTheme"/>
-        <activity android:name="com.zao.zxing.CommonScanActivity" />
+        <activity android:name="com.zao.zxing.CommonScanActivity"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name="com.zao.zxing.CreateCodeActivity" />
         <activity android:name="com.zao.zxing.MyScanActivity" />
 
