@@ -1,5 +1,6 @@
 package com.zao.zxing;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -7,12 +8,15 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -23,7 +27,9 @@ import android.widget.Toast;
 
 import com.google.zxing.WriterException;
 import com.zao.utils.BitmapUtil;
+import com.zao.utils.Constant;
 import com.zao.utils.DateUtil;
+import com.zao.utils.PaintUtils;
 import com.zao.utils.RandomUtils;
 import com.zao.utils.StatusBarUtil;
 import com.zao.utils.ZouUtil;
@@ -81,6 +87,7 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
         ivBarCode = (ImageView)findViewById(R.id.iv_bar_code);
         ivBarCode.setOnClickListener(this);
 
+        btnCreateCode.setOnLongClickListener(this);
         btnCreateCodeAndImg.setOnLongClickListener(this);
 
         StatusBarUtil.setStatusBarLightMode(this,true); //修改字体颜色
@@ -143,35 +150,52 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
             etCodeKey.setText(key);
         }
 
+        Intent intent;
         switch (view.getId()){
+            case R.id.btn_create_code :
+                intent = initImageIntent();
+                this.startActivityForResult(intent, Constant.LONG_CLCIK_TO_PHOTO_ONE);
+                break;
             case R.id.btn_create_code_and_img :
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.PICK");
-                intent.setType("image/*");
-                this.startActivityForResult(intent, 0);
+                intent = initImageIntent();
+                this.startActivityForResult(intent, Constant.LONG_CLCIK_TO_PHOTO_TWO);
                 break;
         }
         return false;
     }
 
+    private Intent initImageIntent() {
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.PICK");
+        intent.setType("image/*");
+        return intent;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data != null) {
-            uri = data.getData();
+            String id = RandomUtils.getCard(8);
+            if (data != null) {
+                uri = data.getData();
+            }
+            key = "http://www." + ConstantZ.ZOU + ".com/z/" + id;
+            etCodeKey.setText(key);
+            Bitmap bitmap = create2Code(key);
+            Bitmap headBitmap = getHeadBitmap(sWidth/5,BitmapUtil.getBitmapFormUri(mContext,uri));
+        if(requestCode == Constant.LONG_CLCIK_TO_PHOTO_ONE){
+            if(bitmap!=null&&headBitmap!=null&&id!=null){
+                createQRCodeBitmapWithPortrait(bitmap,headBitmap,"我的ID：" + id);
+            }
+        } else if (requestCode == Constant.LONG_CLCIK_TO_PHOTO_TWO){
+            if(bitmap!=null&&headBitmap!=null){
+                createQRCodeBitmapWithPortrait(bitmap,headBitmap);
+            }
         }
-        key = "http://www." + ConstantZ.ZOU + ".com/z/" + RandomUtils.getCard(8);
-        etCodeKey.setText(key);
-        Bitmap bitmap = create2Code(key);
-        Bitmap headBitmap = getHeadBitmap(sWidth/5,BitmapUtil.getBitmapFormUri(mContext,uri));
-        if(bitmap!=null&&headBitmap!=null){
-            createQRCodeBitmapWithPortrait(bitmap,headBitmap);
-        }
+        //条形码
         createBarCode(key);
-
-       /**
-         * 直接显示图片
-         */
+        /**
+          * 直接显示图片
+          */
 /*        if (data != null) {
             Uri uri = data.getData();
             iv2Code.setImageURI(uri);
@@ -270,6 +294,38 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
         // 设置我们要绘制的范围大小，也就是头像的大小范围
         Rect rect2 = new Rect(0, 0, portrait_W, portrait_H);
         // 开始绘制
+        canvas.drawBitmap(portrait, rect2, rect1, null);
+    }
+
+    /**
+     * 在二维码上绘制头像， 并添加下边的文字
+     */
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private void createQRCodeBitmapWithPortrait(Bitmap qr, Bitmap portrait,String id) {
+        // 头像图片的大小
+        int portrait_W = portrait.getWidth();
+        int portrait_H = portrait.getHeight();
+
+        // 设置头像要显示的位置，即居中显示
+        int left = (qr.getWidth() - portrait_W) / 2;
+        int top = (qr.getHeight() - portrait_H) / 2;
+        int right = left + portrait_W;
+        int bottom = top + portrait_H;
+        Rect rect1 = new Rect(left, top, right, bottom);
+
+        //设置文字的画笔
+        TextPaint tPaint = new TextPaint();
+        tPaint.setColor(Color.BLACK);
+        tPaint.setTextSize(40);
+        tPaint.setTypeface(Typeface.DEFAULT_BOLD);
+
+        // 取得qr二维码图片上的画笔，即要在二维码图片上绘制我们的头像
+        Canvas canvas = new Canvas(qr);
+
+        // 设置我们要绘制的范围大小，也就是头像的大小范围
+        Rect rect2 = new Rect(0, 0, portrait_W, portrait_H);
+        // 开始绘制
+        canvas.drawText(id,(qr.getWidth() - PaintUtils.getTextWidth(tPaint,id))/2, qr.getHeight() - 20,tPaint); // 画文字
         canvas.drawBitmap(portrait, rect2, rect1, null);
     }
 

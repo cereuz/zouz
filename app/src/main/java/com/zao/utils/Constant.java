@@ -26,6 +26,8 @@ public class Constant {
     public final static String ZOU_DIR = "/azou/";
     public final static String CHANNEL_ID_ZOU_CHAT = "zouChat";
     public static final String CHANNEL_ID_ZOU_SUBSCRIBE = "zouSub";
+    public static final int LONG_CLCIK_TO_PHOTO_ONE = 1001;
+    public static final int LONG_CLCIK_TO_PHOTO_TWO = 1002;
 
     /**
      * 添加轮播图的数据
