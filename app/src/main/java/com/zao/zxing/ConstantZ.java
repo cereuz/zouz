@@ -9,7 +9,7 @@ public interface ConstantZ {
      */
     public static final String REQUEST_SCAN_TYPE="type";
 
-    public static final String ZOU= "http://www.zou.com";
+    public static final String ZOU= "zou";
     /**
      * 普通类型，扫完即关闭
      */

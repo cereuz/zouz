@@ -8,7 +8,7 @@
         android:id="@+id/et_code_key"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="http://www.zou.com"
+        android:hint="http://www.zou.com/z/36363636"
         android:gravity="center"
         android:textSize="17sp"
         android:padding="10dp"

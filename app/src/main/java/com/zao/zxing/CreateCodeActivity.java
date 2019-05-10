@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.google.zxing.WriterException;
 import com.zao.utils.BitmapUtil;
 import com.zao.utils.DateUtil;
+import com.zao.utils.RandomUtils;
 import com.zao.utils.StatusBarUtil;
 import com.zao.utils.ZouUtil;
 import com.zao.zouz.R;
@@ -92,18 +93,22 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view){
         key = etCodeKey.getText().toString().trim();
         if(TextUtils.isEmpty(key)){
-            key = ConstantZ.ZOU;
+            key = "http://www." + ConstantZ.ZOU + ".com/z/" + RandomUtils.getCard(8);
         }
         switch (view.getId()){
             case  R.id.btn_create_code: //生成码
                 if(TextUtils.isEmpty(key)){
                     Toast.makeText(this,"请输入内容",Toast.LENGTH_SHORT).show();
                 }else{
+                    key = "http://www." + ConstantZ.ZOU + ".com/z/" + RandomUtils.getCard(8);
+                    etCodeKey.setText(key);
                     create2Code(key);
                     createBarCode(key);
                 }
                 break;
             case  R.id.btn_create_code_and_img: //生成码, 加入头像
+                key = "http://www." + ConstantZ.ZOU + ".com/z/" + RandomUtils.getCard(8);
+                etCodeKey.setText(key);
                 Bitmap bitmap = create2Code(key);
                 Bitmap headBitmap = getHeadBitmap(sWidth/5);
                 if(bitmap!=null&&headBitmap!=null){
@@ -134,7 +139,8 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
     public boolean onLongClick(View view) {
         key = etCodeKey.getText().toString().trim();
         if(TextUtils.isEmpty(key)){
-            key = ConstantZ.ZOU;
+            key = "http://www." + ConstantZ.ZOU + ".com/z/" + RandomUtils.getCard(8);
+            etCodeKey.setText(key);
         }
 
         switch (view.getId()){
@@ -154,6 +160,8 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
         if (data != null) {
             uri = data.getData();
         }
+        key = "http://www." + ConstantZ.ZOU + ".com/z/" + RandomUtils.getCard(8);
+        etCodeKey.setText(key);
         Bitmap bitmap = create2Code(key);
         Bitmap headBitmap = getHeadBitmap(sWidth/5,BitmapUtil.getBitmapFormUri(mContext,uri));
         if(bitmap!=null&&headBitmap!=null){
@@ -161,7 +169,7 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
         }
         createBarCode(key);
 
-            /**
+       /**
          * 直接显示图片
          */
 /*        if (data != null) {
@@ -300,7 +308,7 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
         //    File file =  new File("/sdcard/1delete/1.png");/////延时较长
         try {
             BufferedOutputStream bos= new BufferedOutputStream(new FileOutputStream(file));
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, bos);
             bos.flush();
             bos.close();
             //通知手机更新相册显示内容
@@ -314,8 +322,7 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
         File file = new File(picPath);
         if(file.exists()){
             file.delete();
-        }
-
-    }///deleteFile
+            }
+        }///deleteFile
 }
 
