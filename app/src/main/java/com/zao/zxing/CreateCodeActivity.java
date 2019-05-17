@@ -326,7 +326,7 @@ public class CreateCodeActivity extends AppCompatActivity implements View.OnClic
         Rect rect2 = new Rect(0, 0, portrait_W, portrait_H);
         // 开始绘制
         canvas.drawText(id,(qr.getWidth() - PaintUtils.getTextWidth(tPaint,id))/2, qr.getHeight() - 20,tPaint); // 画文字
-        canvas.drawBitmap(portrait, rect2, rect1, null);
+        canvas.drawBitmap(portrait, rect2, rect1, null); //画图片
     }
 
 

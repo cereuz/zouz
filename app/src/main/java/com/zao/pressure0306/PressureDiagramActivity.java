@@ -143,7 +143,7 @@ public class PressureDiagramActivity extends AppCompatActivity {
             }
         });
 
-        EventBus.getDefault().post(new MessageEvent(pressureS, "蜗牛",time));
+//        EventBus.getDefault().post(new MessageEvent(pressureS, "蜗牛",time));
     }
 
     //模拟开启，模拟停止

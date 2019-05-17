@@ -7,6 +7,10 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.zao.base.MyApp;
+import com.zao.utils.DisplayUtils;
+import com.zao.utils.LogZ;
+
 /**
  * @author : zw
  * @email : zsky@live.com
@@ -15,7 +19,8 @@ import android.view.View;
  */
 public class MyPressureView extends View {
     private int pressure = 300;
-
+    int height;
+    int width;
     public MyPressureView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         //多了一个defStyleAttr  在xml文件中声明一个样式的时候，解析xml之后，就会转换成这个defStyleAttr
@@ -42,21 +47,27 @@ public class MyPressureView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        height = DisplayUtils.getDisplayHight(MyApp.getContext());
+        width = DisplayUtils.getDisplayWidth(MyApp.getContext());
+        int bottom = height / 20 * 13;
+        float i = (bottom - height / 5)/ 100 ;
+        LogZ.e("屏幕高度：" + height + "，屏幕宽度：" + width + ",i :" + i);
         Paint paint = new  Paint();
-        if(pressure > 599){
+        if(pressure > 75){
             paint.setColor(Color.RED);
-        }  else if (pressure > 399){
+        }  else if (pressure > 50){
             paint.setColor(Color.YELLOW);
-        }  else  {
+        }  else if (pressure > 25){
+            paint.setColor(Color.BLUE);
+        }   else  {
             paint.setColor(Color.GREEN);
         }
 //		canvas.drawRect(left, top, right, bottom, paint);
-        canvas.drawRect(100, 800-pressure , 300, 900, paint);
+        canvas.drawRect(width/3, (100 - pressure) * i , width / 3 * 2, bottom , paint);
 
         paint.setTextSize(40);
         paint.setColor(Color.BLACK);
-        canvas.drawText("当前压力值："+ pressure, 60, 960, paint);
-
+        canvas.drawText("当前压力值："+ pressure, width / 4, height / 32 * 23, paint);
     }
 }
 

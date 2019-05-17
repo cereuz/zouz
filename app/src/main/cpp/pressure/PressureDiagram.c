@@ -11,7 +11,7 @@
 
         //获取压力的方法
         int getPressure(){
-        return  rand()%801;
+        return  rand()% 101;
         }
 
         int  flag = 1;
